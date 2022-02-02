@@ -1,14 +1,43 @@
-import { StyleSheet } from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import CentresItem from "../components/CentresItem";
+import SpaceCraftItem from "../components/SpaceCraftItem";
 
 export default function TabTwoScreen() {
+  const [spaceCrafts,setSpaceCrafts] = useState([]);
+
+  const getSpaceCrafts = () => {
+    axios.get('https://isro.vercel.app/api/spacecrafts')
+        .then((response) => {
+          // handle success
+
+          setSpaceCrafts(response.data.spacecrafts);
+
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+  }
+
+  useEffect(()=>{
+    getSpaceCrafts();
+  }, [])
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <FlatList
+          data={spaceCrafts}
+          renderItem={({item})=> <SpaceCraftItem spaceCraft={item}/>}
+          keyExtractor={item=>item.id}
+      />
+
     </View>
   );
 }
@@ -16,16 +45,6 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+
+  }
 });
