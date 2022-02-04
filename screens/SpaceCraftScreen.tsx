@@ -1,23 +1,22 @@
-import {FlatList, ImageBackground, SafeAreaView, StyleSheet} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import CentresItem from "../components/CentresItem";
+import SpaceCraftItem from "../components/SpaceCraftItem";
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-
-    const [centres,setCentres] = useState([]);
+export default function SpaceCraftScreen() {
+  const [spaceCrafts,setSpaceCrafts] = useState([]);
 
   const getSpaceCrafts = () => {
-    axios.get('https://isro.vercel.app/api/centres')
+    axios.get('https://isro.vercel.app/api/spacecrafts')
         .then((response) => {
           // handle success
 
-          setCentres(response.data.centres);
-          console.log(centres);
+          setSpaceCrafts(response.data.spacecrafts);
+
         })
         .catch(function (error) {
           // handle error
@@ -33,12 +32,11 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   }, [])
   return (
     <SafeAreaView style={styles.container}>
-        <FlatList
-            data={centres}
-            renderItem={({item})=> <CentresItem centre={item}/>}
-            keyExtractor={item=>item.id}
-        />
-
+      <FlatList
+          data={spaceCrafts}
+          renderItem={({item})=> <SpaceCraftItem spaceCraft={item}/>}
+          keyExtractor={item=>item.id}
+      />
 
     </SafeAreaView>
   );
@@ -47,10 +45,6 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-  },
-  image:{
-    flex: 1,
 
-  },
+  }
 });

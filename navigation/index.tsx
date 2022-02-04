@@ -3,7 +3,8 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import {FontAwesome, FontAwesome5} from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -12,12 +13,12 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import CentreScreen from '../screens/CentreScreen';
+import SpaceCraftScreen from '../screens/SpaceCraftScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import LauncherScreen from "../screens/LauncherScreen";
+import CustomerSatelliteScreen from "../screens/CustomerSatelliteScreen";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -39,10 +40,6 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -58,27 +55,46 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Centre"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-            headerShown: false
-        })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Centre"
+        component={CentreScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+            tabBarLabel: "Centres",
+            tabBarIcon: ({ color }) => <MaterialIcons name="place" size={24} color={color} />,
+            headerShown: false
         }}
       />
+      <BottomTab.Screen
+        name="SpaceCraft"
+        component={SpaceCraftScreen}
+        options={{
+            tabBarLabel: "Spacecrafts",
+            tabBarIcon: ({ color }) => <FontAwesome5 name="space-shuttle" size={24} color={color} />,
+            headerShown: false
+        }}
+      />
+        <BottomTab.Screen
+            name="Launcher"
+            component={LauncherScreen}
+            options={{
+                tabBarLabel: "Launchers",
+                tabBarIcon: ({ color }) => <FontAwesome name="space-shuttle" size={24} color={color} />,
+                headerShown: false
+            }}
+        />
+        <BottomTab.Screen
+            name="CustomerSatellite"
+            component={CustomerSatelliteScreen}
+            options={{
+                tabBarLabel: "Satellites",
+                tabBarIcon: ({ color }) => <FontAwesome5 name="satellite" size={24} color={color} />,
+                headerShown: false
+            }}
+        />
     </BottomTab.Navigator>
   );
 }
