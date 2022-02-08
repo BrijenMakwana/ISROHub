@@ -10,6 +10,7 @@ import SpaceCraftItem from "../components/SpaceCraftItem";
 export default function SpaceCraftScreen() {
   const [spaceCrafts,setSpaceCrafts] = useState([]);
 
+  // get all spacecrafts
   const getSpaceCrafts = () => {
     axios.get('https://isro.vercel.app/api/spacecrafts')
         .then((response) => {
@@ -31,7 +32,9 @@ export default function SpaceCraftScreen() {
     getSpaceCrafts();
   }, [])
   return (
+
     <SafeAreaView style={styles.container}>
+      {/* list of all spacecrafts */}
       <FlatList
           data={spaceCrafts}
           renderItem={({item})=> <SpaceCraftItem spaceCraft={item}/>}
@@ -45,6 +48,7 @@ export default function SpaceCraftScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+      backgroundColor: "#fff"
 
   }
 });

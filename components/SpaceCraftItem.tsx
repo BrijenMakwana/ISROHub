@@ -11,7 +11,10 @@ export type SpaceCraftItemProps = {
 const SpaceCraftItem = (props: SpaceCraftItemProps) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.name}>{props.spaceCraft.name}</Text>
+            {/* name */}
+            <Text style={styles.name}>
+                {props.spaceCraft.name}
+            </Text>
         </View>
     );
 };
@@ -22,25 +25,25 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: "center",
-        backgroundColor: "#334756",
+        backgroundColor: "#fff",
         width: "90%",
         alignSelf: "center",
         borderRadius: 20,
         shadowOpacity: 0.5,
         elevation: 10,
-        shadowColor: "#000",
+        shadowColor: "#512B58",
         shadowOffset:{
             height: 5,
             width: 5
         },
-        marginTop: 20,
+        marginVertical: 15,
         padding: 10
 
     },
     name: {
         fontSize: 25,
         fontWeight: 'bold',
-        color: "#F0A500",
+        color: "#2C003E",
 
     }
 });

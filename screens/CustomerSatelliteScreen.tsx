@@ -12,7 +12,8 @@ import CustomerSatelliteItem from "../components/CustomerSatelliteItem";
 export default function CustomerSatelliteScreen() {
     const [satellites,setSatellites] = useState([]);
 
-    const getSpaceCrafts = () => {
+    //get all satellites
+    const getSatellites = () => {
         axios.get('https://isro.vercel.app/api/customer_satellites')
             .then((response) => {
                 // handle success
@@ -30,11 +31,12 @@ export default function CustomerSatelliteScreen() {
     }
 
     useEffect(()=>{
-        getSpaceCrafts();
+        getSatellites();
     }, []);
     
     return (
         <SafeAreaView style={styles.container}>
+            {/* list of satellites */}
             <FlatList
                 data={satellites}
                 renderItem={({item})=> <CustomerSatelliteItem satellite={item}/>}
@@ -48,6 +50,6 @@ export default function CustomerSatelliteScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
+        backgroundColor: "#fff"
     }
 });

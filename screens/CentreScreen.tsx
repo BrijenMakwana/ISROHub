@@ -11,7 +11,8 @@ export default function CentreScreen({ navigation }: RootTabScreenProps<'TabOne'
 
     const [centres,setCentres] = useState([]);
 
-  const getSpaceCrafts = () => {
+  //  get all centres
+  const getCentres = () => {
     axios.get('https://isro.vercel.app/api/centres')
         .then((response) => {
           // handle success
@@ -29,10 +30,11 @@ export default function CentreScreen({ navigation }: RootTabScreenProps<'TabOne'
   }
 
   useEffect(()=>{
-    getSpaceCrafts();
+      getCentres();
   }, [])
   return (
     <SafeAreaView style={styles.container}>
+        {/* list of centres */}
         <FlatList
             data={centres}
             renderItem={({item})=> <CentresItem centre={item}/>}

@@ -51,30 +51,30 @@ export default CustomerSatelliteItem;
 const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
-        backgroundColor: "#334756",
+        backgroundColor: "#fff",
         width: "90%",
         alignSelf: "center",
         borderRadius: 20,
         shadowOpacity: 0.5,
         elevation: 10,
-        shadowColor: "#000",
+        shadowColor: "#512B58",
         shadowOffset:{
             height: 5,
             width: 5
         },
-        marginTop: 20,
+        marginVertical: 15,
         padding: 20
 
     },
     heading:{
         marginTop: 5,
         fontSize: 17,
-        color: "#fff"
+        color: "#FE346E"
     },
     data: {
         fontSize: 25,
         fontWeight: 'bold',
-        color: "#F0A500",
+        color: "#2C003E",
     }
 
 });

@@ -11,7 +11,8 @@ import LauncherItem from "../components/LauncherItem";
 export default function LauncherScreen() {
     const [launchers,setLaunchers] = useState([]);
 
-    const getSpaceCrafts = () => {
+    //get all launchers
+    const getLaunchers = () => {
         axios.get('https://isro.vercel.app/api/launchers')
             .then((response) => {
                 // handle success
@@ -29,10 +30,11 @@ export default function LauncherScreen() {
     }
 
     useEffect(()=>{
-        getSpaceCrafts();
+        getLaunchers();
     }, [])
     return (
         <SafeAreaView style={styles.container}>
+            {/* list of launchers */}
             <FlatList
                 data={launchers}
                 renderItem={({item})=> <LauncherItem launcher={item}/>}
@@ -46,6 +48,7 @@ export default function LauncherScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#fff"
 
     }
 });
